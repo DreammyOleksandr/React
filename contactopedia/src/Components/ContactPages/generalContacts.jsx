@@ -1,9 +1,11 @@
-const GeneralContacts = () => {
+import Contact from "./contact";
+
+const GeneralContacts = (props) => {
   return (
     <div>
-      <button className="btn btn-secondary form-control">
-        General contacts
-      </button>
+      {props.contacts.map((contact, index) => (
+        <Contact contact={contact} key={index}></Contact>
+      ))}
     </div>
   );
 };
