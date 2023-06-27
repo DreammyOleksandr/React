@@ -1,11 +1,9 @@
 import ReactDOM from "react-dom/client";
-import Header from "./Components/Layout/header";
-import Footer from "./Components/Layout/footer";
+import ContactIndex from "./Components/ContactPages/contactIndex";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <div>
-    <Header></Header>
-    <Footer></Footer>
+    <ContactIndex></ContactIndex>
   </div>
 );
