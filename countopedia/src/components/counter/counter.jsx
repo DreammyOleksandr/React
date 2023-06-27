@@ -7,7 +7,7 @@ class Counter extends React.Component {
     super(props);
     this.handleAttack = this.handleAttack.bind(this);
     this.handleDefence = this.handleDefence.bind(this);
-    this.state = { count: 0 };
+    this.state = { count: 0, gameStatus: "", lastPlay: "" };
   }
   handleAttack = () => {
     // alert("Attack clicked");
@@ -16,6 +16,8 @@ class Counter extends React.Component {
       let newCount = previousState.count + Math.round(Math.random() * 10);
       return {
         count: newCount,
+        lastPlay: "Attack",
+        gameStatus: newCount >= 10 ? "You won:3" : previousState.gameStatus,
       };
     });
   };
@@ -26,6 +28,8 @@ class Counter extends React.Component {
       let newCount = previousState.count - Math.round(Math.random() * 10);
       return {
         count: newCount,
+        lastPlay: "Defence",
+        gameStatus: newCount <= -10 ? "You lost:(" : previousState.gameStatus,
       };
     });
   };
@@ -43,6 +47,8 @@ class Counter extends React.Component {
     this.setState((previousState) => {
       return {
         count: 0,
+        gameStatus: "",
+        lastPlay: "",
       };
     });
   };
@@ -55,8 +61,8 @@ class Counter extends React.Component {
           {score} : {this.state.count}
         </h1>
         <p>You win at +10 points and lose at -10 points</p>
-        <p>Last play:</p>
-        <h3>Game status:</h3>
+        <p>Last play: {this.state.lastPlay}</p>
+        <h3>Game status: {this.state.gameStatus}</h3>
         <div className="col-6 col-md-3 offset-md-3">
           <img
             style={{
@@ -69,7 +75,7 @@ class Counter extends React.Component {
             onClick={this.handleAttack}
           ></img>
         </div>
-        <div className="col-6 col-md-3 offset-md-3">
+        <div className="col-6 col-md-3">
           <img
             style={{
               width: "100%",
@@ -81,7 +87,7 @@ class Counter extends React.Component {
             onClick={this.handleDefence}
           ></img>
         </div>
-        <div className="col-12 col-md-4 offset md-4">
+        <div className="col-12 col-md-4 offset md-4 ">
           <button
             className="btn btn-secondary w-100 mt-2"
             onClick={this.handleRandomPlay}
