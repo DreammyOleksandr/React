@@ -28,7 +28,7 @@ class ContactIndex extends React.Component {
         },
         {
           id: 3,
-          name: "Myhaylo Balachon",
+          name: "Myhaylo Balakhon",
           phone: "6089035335",
           email: "etwwegvds@gmail.com",
           isFavourite: true,
@@ -37,7 +37,17 @@ class ContactIndex extends React.Component {
     };
   }
 
-  handleAddContact = () => {
+  handleAddContact = (newContact) => {
+    const newFinalContact = {
+      ...newContact,
+      id: this.state.contactList[this.state.contactList.length - 1].id + 1,
+      isFavourite: false,
+    };
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.concat([newFinalContact]),
+      };
+    });
     alert("Hello");
   };
 
