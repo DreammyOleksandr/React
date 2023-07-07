@@ -48,6 +48,7 @@ class ContactIndex extends React.Component {
       if (x.name === newContact.name && x.phone === newContact.phone) {
         return true;
       }
+      return false;
     });
     if (duplicateRecord.length > 0) {
       return { status: "failure", msg: "Duplicate record" };
@@ -64,6 +65,16 @@ class ContactIndex extends React.Component {
       });
       return { status: "success", msg: "Contact was added successfully!" };
     }
+  };
+
+  handleDeleteContact = (contactId) => {
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.filter((obj) => {
+          return obj.id !== contactId;
+        }),
+      };
+    });
   };
 
   handleToggleFavourite = (contact) => {
@@ -105,6 +116,7 @@ class ContactIndex extends React.Component {
                     (u) => u.isFavourite === true
                   )}
                   favouriteClick={this.handleToggleFavourite}
+                  deleteContact={this.handleDeleteContact}
                 ></FavouriteContacts>
               </div>
             </div>
@@ -115,6 +127,7 @@ class ContactIndex extends React.Component {
                     (u) => u.isFavourite === false
                   )}
                   favouriteClick={this.handleToggleFavourite}
+                  deleteContact={this.handleDeleteContact}
                 ></GeneralContacts>
               </div>
             </div>
