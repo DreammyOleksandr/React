@@ -45,7 +45,7 @@ class ContactIndex extends React.Component {
     }
 
     const duplicateRecord = this.state.contactList.filter((x) => {
-      if (x.name == newContact.name && x.phone == newContact.phone) {
+      if (x.name === newContact.name && x.phone === newContact.phone) {
         return true;
       }
     });
@@ -64,6 +64,10 @@ class ContactIndex extends React.Component {
       });
       return { status: "success", msg: "Contact was added successfully!" };
     }
+  };
+
+  handleToggleFavourite = (contact) => {
+    console.log(contact);
   };
 
   render() {
@@ -91,6 +95,7 @@ class ContactIndex extends React.Component {
                   contacts={this.state.contactList.filter(
                     (u) => u.isFavourite === true
                   )}
+                  favouriteClick={this.handleToggleFavourite}
                 ></FavouriteContacts>
               </div>
             </div>
@@ -100,6 +105,7 @@ class ContactIndex extends React.Component {
                   contacts={this.state.contactList.filter(
                     (u) => u.isFavourite === false
                   )}
+                  favouriteClick={this.handleToggleFavourite}
                 ></GeneralContacts>
               </div>
             </div>
