@@ -67,7 +67,16 @@ class ContactIndex extends React.Component {
   };
 
   handleToggleFavourite = (contact) => {
-    console.log(contact);
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.map((obj) => {
+          if (obj.id === contact.id) {
+            return { ...obj, isFavourite: !obj.isFavourite };
+          }
+          return obj;
+        }),
+      };
+    });
   };
 
   render() {
