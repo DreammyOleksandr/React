@@ -34,6 +34,8 @@ class ContactIndex extends React.Component {
           isFavourite: true,
         },
       ],
+      selectedContact: undefined,
+      isUpdating: false,
     };
   }
 
@@ -90,6 +92,16 @@ class ContactIndex extends React.Component {
     });
   };
 
+  handleUpdateClick = (contact) => {
+    console.log(contact);
+    this.setState((prevState) => {
+      return {
+        selectedContact: contact,
+        isUpdating: true,
+      };
+    });
+  };
+
   handleAddRandomContact = (newContact) => {
     const newFinalContact = {
       ...newContact,
@@ -130,6 +142,8 @@ class ContactIndex extends React.Component {
               <div className="col-8 offset-2 row">
                 <AddContact
                   handleAddContact={this.handleAddContact}
+                  isUpdating={this.state.isUpdating}
+                  selectedContact={this.state.selectedContact}
                 ></AddContact>
               </div>
             </div>
@@ -141,6 +155,7 @@ class ContactIndex extends React.Component {
                   )}
                   favouriteClick={this.handleToggleFavourite}
                   deleteContact={this.handleDeleteContact}
+                  updateClick={this.handleUpdateClick}
                 ></FavouriteContacts>
               </div>
             </div>
@@ -152,6 +167,7 @@ class ContactIndex extends React.Component {
                   )}
                   favouriteClick={this.handleToggleFavourite}
                   deleteContact={this.handleDeleteContact}
+                  updateClick={this.handleUpdateClick}
                 ></GeneralContacts>
               </div>
             </div>
