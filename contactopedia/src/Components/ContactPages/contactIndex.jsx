@@ -168,7 +168,7 @@ class ContactIndex extends React.Component {
                   handleAddContact={this.handleAddContact}
                   isUpdating={this.state.isUpdating}
                   selectedContact={this.state.selectedContact}
-                  cancelUpdating={this.state.handleCancelUpdateContact}
+                  cancelUpdating={this.handleCancelUpdateContact}
                 ></AddContact>
               </div>
             </div>
