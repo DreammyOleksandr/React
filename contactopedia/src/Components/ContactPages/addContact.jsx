@@ -54,6 +54,9 @@ class AddContact extends React.Component {
                 className="form-control form-control-sm"
                 placeholder="Email..."
                 name="contactEmail"
+                defaultValue={
+                  this.props.isUpdating ? this.props.selectedContact.email : ""
+                }
               ></input>
             </div>
             <div className="col-12 col-md-4 p-1">
@@ -61,6 +64,9 @@ class AddContact extends React.Component {
                 className="form-control form-control-sm"
                 placeholder="Phone..."
                 name="contactPhone"
+                defaultValue={
+                  this.props.isUpdating ? this.props.selectedContact.phone : ""
+                }
               ></input>
             </div>
             {this.state.errorMessage === undefined ? (
@@ -90,7 +96,10 @@ class AddContact extends React.Component {
             </div>
             {this.props.isUpdating && (
               <div className="col-12 col-md-4 p-1">
-                <button className="btn btn-secondary form-control btn-sm">
+                <button
+                  className="btn btn-secondary form-control btn-sm"
+                  onClick={() => this.cancelUpdating}
+                >
                   Cancel
                 </button>
               </div>

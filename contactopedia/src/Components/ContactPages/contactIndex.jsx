@@ -69,6 +69,20 @@ class ContactIndex extends React.Component {
     }
   };
 
+  handleUpdateContact = (contact) => {
+    if (contact.name === "") {
+      return { status: false, msg: "Please, enter a valid name" };
+    } else if (contact.phone === "") {
+      return { status: false, msg: "Please, enter a valid phone number" };
+    }
+    this.setState((prevState) => {
+      return {
+        contactList: prevState.contactList.concat([contact]),
+      };
+    });
+    return { status: "success", msg: "Contact was added successfully!" };
+  };
+
   handleDeleteContact = (contactId) => {
     this.setState((prevState) => {
       return {
@@ -98,6 +112,16 @@ class ContactIndex extends React.Component {
       return {
         selectedContact: contact,
         isUpdating: true,
+      };
+    });
+  };
+
+  handleCancelUpdateContact = (contact) => {
+    console.log(contact);
+    this.setState((prevState) => {
+      return {
+        selectedContact: undefined,
+        isUpdating: false,
       };
     });
   };
@@ -144,6 +168,7 @@ class ContactIndex extends React.Component {
                   handleAddContact={this.handleAddContact}
                   isUpdating={this.state.isUpdating}
                   selectedContact={this.state.selectedContact}
+                  cancelUpdating={this.state.handleCancelUpdateContact}
                 ></AddContact>
               </div>
             </div>
