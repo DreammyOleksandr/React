@@ -1,17 +1,55 @@
 import React from "react";
+import { getRandomUser } from "./Utility/api";
 
-class CyclopediaClassPage extends React.Component{
-    constructor(props){
-        super(props)
-        this.state ={
-            instructor: undefined,
-            studentList: [],
-            studentCount:0,
-            hideInstructor:false,
-        }
-    }
+class CyclopediaClassPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      instructor: undefined,
+      studentList: [],
+      studentCount: 0,
+      hideInstructor: false,
+    };
+  }
 
-    render(){
-        
-    }
+  componentDidMount = async () => {
+    const response = await getRandomUser();
+    console.log("Mount");
+    console.log(response);
+
+    this.setState((prevState) => {
+      return {
+        instructor: {
+          name: response.data.first_name + " " + response.data.last_name,
+          email: response.data.email,
+          phone: response.data.phone_number,
+        },
+      };
+    });
+  };
+  componentDidUpdate = () => {
+    console.log("Update");
+  };
+  componentWillUnmount = () => {
+    console.log("Will UnMount");
+  };
+
+  render = () => {
+    return (
+      <div>
+        {this.state.instructor && (
+          <div className="p-3">
+            <span className="h-4 text-success">Instructor</span>
+            <i className="bi bi-toggle-off btn btn-success btn-sm"></i>
+            <br />
+            Name: {this.state.instructor.name} <br />
+            Email: {this.state.instructor.email} <br />
+            Phone: {this.state.instructor.phone} <br />
+          </div>
+        )}
+      </div>
+    );
+  };
 }
+
+export default CyclopediaClassPage;
