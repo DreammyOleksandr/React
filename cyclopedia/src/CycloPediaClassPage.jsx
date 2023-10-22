@@ -9,6 +9,8 @@ class CyclopediaClassPage extends React.Component {
       studentList: [],
       studentCount: 0,
       hideInstructor: false,
+      inputName: "",
+      inputFeedBack: "",
     };
   }
 
@@ -34,6 +36,17 @@ class CyclopediaClassPage extends React.Component {
     console.log("Will UnMount");
   };
 
+  handleAddStudent = () => {
+    this.setState((prevState) => {
+      return { studentCount: prevState.studentCount + 1 };
+    });
+  };
+  handleRemoveAllStudents = () => {
+    this.setState((prevState) => {
+      return { studentCount: 0 };
+    });
+  };
+
   render = () => {
     return (
       <div>
@@ -47,6 +60,48 @@ class CyclopediaClassPage extends React.Component {
             Phone: {this.state.instructor.phone} <br />
           </div>
         )}
+        <div className="p-3">
+          <span className="h-4 text-success">FeedBack</span>
+          <br />
+          <input
+            type="text"
+            placeholder="Name"
+            value={this.state.inputName}
+            onChange={(e) => {
+              this.setState({ inputName: e.target.value });
+            }}
+          />{" "}
+          {this.state.inputName}
+          <br />
+          <textarea
+            placeholder="feedback"
+            cols="30"
+            rows="10"
+            value={this.state.inputFeedBack}
+            onChange={(e) => {
+              this.setState({ inputFeedBack: e.target.value });
+            }}
+          ></textarea>{" "}
+          {this.state.inputFeedBack}
+        </div>
+
+        <div className="p-3">
+          <span className="h4 text-success">Students</span> <br />
+          <span>Student Count: {this.state.studentCount}</span> <br />
+          <button
+            className="btn btn-success btn-sm"
+            onClick={this.handleAddStudent}
+          >
+            Add student
+          </button>
+          &nbsp;
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={this.handleRemoveAllStudents}
+          >
+            Remove all students
+          </button>
+        </div>
       </div>
     );
   };
