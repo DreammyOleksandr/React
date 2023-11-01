@@ -13,4 +13,4 @@ const getRandomUser = async () => {
   return response;
 };
 
-export { getRandomUser };
+export default getRandomUser;
